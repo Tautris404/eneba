@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./api/migrations/000001_init_tables.up.sql:/docker-entrypoint-initdb.d/000001_init_tables.sql:ro
+      - ./api/migrations/000002_seed_data.up.sql:/docker-entrypoint-initdb.d/000002_seed_data.sql:ro
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'pg_isready -h 127.0.0.1 -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"',
+        ]
+      interval: 1s
+      retries: 10
+
+  api:
+    build: ./api
+    volumes:
+      - ./api/uploads/products:/app/uploads/products:ro
+      - ./api/uploads/sellers:/app/uploads/sellers:ro
+      - ./api/uploads/avatars:/app/uploads/avatars:ro
+      - ./api/uploads/platforms:/app/uploads/platforms:ro
+      - ./api/uploads/home:/app/uploads/home:ro
+    env_file: .env
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      STRIPE_RETURN_BASE_URL: http://localhost:${UI_PORT:-5173}
+    ports:
+      - "${API_PORT}:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  ui:
+    build: ./ui
+    ports:
+      - "${UI_PORT:-5173}:80"
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:

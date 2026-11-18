@@ -1,0 +1,120 @@
+body {
+  margin: 0;
+  background: #f4f4f6;
+}
+table {
+  border-spacing: 0;
+}
+td {
+  padding: 0;
+}
+.page {
+  width: 100%;
+  min-width: 100%;
+  background: #f4f4f6;
+  color: #797189;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6em;
+}
+.layout {
+  padding: 20px 0;
+}
+.header,
+.card {
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+}
+.header {
+  background: #4618ac;
+  text-align: center;
+}
+.header td {
+  height: 44px;
+  padding: 12px 10px;
+  vertical-align: middle;
+  line-height: 0;
+}
+.header a,
+.social a {
+  display: inline-block;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+.header img {
+  width: 130px;
+  height: auto;
+}
+.card {
+  background: #fff;
+  margin-bottom: 10px;
+}
+.content {
+  width: 100%;
+  max-width: 490px;
+  margin: 0 auto;
+}
+.content td {
+  padding: 30px 10px;
+}
+h1 {
+  margin: 0 0 30px;
+  color: #1f0a4e;
+  font-size: 18px;
+  font-weight: 600;
+}
+p {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 400;
+}
+strong {
+  font-weight: 600;
+}
+.code-row {
+  margin-top: 13px;
+}
+.code {
+  display: inline-block;
+  padding: 10px 15px;
+  background: #f4f4f6;
+  color: #000;
+  font-size: 30px;
+  line-height: 33px;
+  letter-spacing: 5px;
+}
+.thanks {
+  margin-top: 20px;
+}
+.signature-logo {
+  width: 90px;
+  height: auto;
+}
+.social {
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+  text-align: center;
+}
+.social td {
+  width: 20%;
+  height: 34px;
+  vertical-align: middle;
+}
+.social img {
+  width: 18px;
+  height: 18px;
+}
+.copyright {
+  margin: 5px 0 0;
+  text-align: center;
+}
+@media (max-width: 510px) {
+  .content td {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}

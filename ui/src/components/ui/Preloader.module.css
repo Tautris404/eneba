@@ -1,0 +1,66 @@
+.preloader {
+  flex-shrink: 0;
+}
+
+.inline {
+  display: inline-flex;
+}
+
+.centered {
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.spinner {
+  display: block;
+  animation: spin 1s linear infinite;
+}
+
+.sm .spinner {
+  width: 15px;
+  height: 15px;
+}
+
+.md .spinner {
+  width: 24px;
+  height: 24px;
+}
+
+.lg .spinner {
+  width: 32px;
+  height: 32px;
+}
+
+.white {
+  color: #fff;
+}
+
+.black {
+  color: #000;
+}
+
+.primary {
+  color: var(--yellow);
+}
+
+.label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 3s;
+  }
+}

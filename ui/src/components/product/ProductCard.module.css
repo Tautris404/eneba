@@ -1,0 +1,432 @@
+.card {
+  --actions-offset: 96px;
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--dark-purple);
+}
+
+.card[data-sold-out]::after {
+  position: absolute;
+  inset: 0;
+  background: #1f0a4d;
+  opacity: .5;
+  pointer-events: none;
+  transition: opacity 150ms ease-in-out;
+  content: '';
+}
+
+.card[data-sold-out]:hover::after { opacity: .6; }
+
+.card[data-sold-out] .information { display: flex; flex-direction: column; }
+.soldOut {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: auto 0 10px;
+  color: #dcd8e6;
+  font-size: 14px;
+  font-weight: 600;
+}
+.soldOut img { flex: none; }
+
+.link {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+}
+
+.card > .link:focus-visible {
+  outline: none;
+}
+
+.card > .link:focus-visible .name {
+  text-decoration: underline;
+}
+
+.cover {
+  position: relative;
+  display: grid;
+  aspect-ratio: 5 / 7;
+  overflow: hidden;
+  place-items: center;
+  background: #301368;
+}
+
+.coverImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 150ms ease-in-out;
+}
+
+.platform {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 22px;
+  background: rgb(0 0 0 / 55%);
+  backdrop-filter: blur(5px);
+  color: rgb(255 255 255 / 85%);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 10px;
+  transition: transform 300ms ease-in-out;
+}
+
+.platform img {
+  flex: none;
+  object-fit: contain;
+}
+
+.platform span {
+  max-width: calc(100% - 31px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.noImage {
+  padding: 15px;
+  color: #b3aac9;
+  text-align: center;
+}
+
+.information {
+  position: relative;
+  box-sizing: border-box;
+  height: 145px;
+  padding: 15px;
+  background: var(--dark-purple);
+  transition: transform 300ms ease-in-out;
+}
+
+.card[data-shelf] .cover { aspect-ratio: 200 / 269; }
+.card[data-shelf] .information { height: 155px; }
+
+.name {
+  display: -webkit-box;
+  height: 36px;
+  margin: 0;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 18px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.regions {
+  margin: 8px 0;
+  overflow: hidden;
+  color: #23c299;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 18px;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.from {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  color: #b3aac9;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.discount {
+  color: #84e916;
+  font-weight: 800;
+}
+
+.from del {
+  position: relative;
+  text-decoration: none;
+}
+
+.from del::before {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 0;
+  right: 0;
+  border-top: 1px solid currentColor;
+}
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.plusIcon {
+  display: block;
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+}
+
+.price strong {
+  display: block;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.actions {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 1;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  display: grid;
+  gap: 10px;
+  visibility: hidden;
+  transform: translateY(var(--actions-offset));
+  transition: transform 300ms ease-in-out, visibility 0s 300ms;
+}
+
+.actions :is(button, a) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 35px;
+  padding: 0 10px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 15px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+.addToCart {
+  border: 0;
+  background: var(--yellow);
+  color: #000;
+}
+
+.addToCart:disabled {
+  cursor: wait;
+}
+
+.cartError {
+  position: absolute;
+  z-index: 2;
+  inset: 0 0 auto;
+  margin: 0;
+  padding: 8px;
+  background: var(--dark-purple);
+  color: #ffc3d6;
+  font-size: 12px;
+}
+
+.addToCart:is(:hover, :focus-visible) {
+  background: #f0a613;
+}
+
+.cartIcon {
+  display: none;
+}
+
+.viewOffers {
+  border: 1px solid currentColor;
+  background: transparent;
+  color: #fff;
+}
+
+.viewOffers:is(:hover, :active) {
+  border-color: var(--yellow);
+  background: rgb(0 0 0 / 30%);
+}
+
+.viewOffers:is(:focus-visible, :active) {
+  background: rgb(0 0 0 / 40%);
+}
+
+@media (min-width: 601px) {
+  .card:not([data-sold-out]):focus-within .coverImage {
+    opacity: 0.8;
+  }
+
+  .card:not([data-sold-out]):focus-within :is(.platform, .information) {
+    transform: translateY(calc(-1 * var(--actions-offset)));
+  }
+
+  .card:focus-within .actions {
+    visibility: visible;
+    transform: translateY(0);
+    transition-delay: 0s;
+  }
+}
+
+@media (hover: hover) and (min-width: 601px) {
+  .card:not([data-sold-out]):hover .coverImage {
+    opacity: 0.8;
+  }
+
+  .card:not([data-sold-out]):hover :is(.platform, .information) {
+    transform: translateY(calc(-1 * var(--actions-offset)));
+  }
+
+  .card:hover .actions {
+    visibility: visible;
+    transform: translateY(0);
+    transition-delay: 0s;
+  }
+}
+
+@media (max-width: 600px) {
+  .card:is([data-shelf], :not([data-shelf])) .cover { aspect-ratio: 5 / 7; }
+  .card:is([data-shelf], :not([data-shelf])) .link {
+    display: grid;
+    grid-template-columns: 95px minmax(0, 1fr);
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .cover {
+    align-self: start;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .information {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: auto;
+    min-height: 155px;
+    padding: 0;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .name {
+    height: auto;
+    max-height: 36px;
+    margin-bottom: 8px;
+    padding-right: 50px;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .regions {
+    margin: 0;
+    padding-right: 50px;
+    line-height: 12px;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .price {
+    margin-top: auto;
+    padding-inline-end: 60px;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .from {
+    gap: 3px;
+    font-weight: 800;
+    line-height: 12px;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .discounted .fromLabel {
+    display: none;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .priceRow {
+    margin-top: 5px;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .price strong {
+    margin-top: 2px;
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .actions {
+    inset: auto 9px 9px auto;
+    visibility: visible;
+    transform: none;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .actions .addToCart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 38px;
+    padding: 10px;
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .actions .addToCart:is(:hover, :focus-visible) {
+    border-color: var(--yellow);
+    background: rgb(0 0 0 / 30%);
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .cartIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .cartIcon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .cartIcon .plusIcon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .cartLabel,
+  .card:is([data-shelf], :not([data-shelf])) .viewOffers {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .card:is([data-shelf], :not([data-shelf])) .link {
+    grid-template-columns: 70px minmax(0, 1fr);
+    padding: 9px;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .platform {
+    height: 18px;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .platform img {
+    width: 12px;
+    height: 12px;
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .platform:has(img) span {
+    position: absolute;
+    clip-path: inset(50%);
+  }
+
+  .card:is([data-shelf], :not([data-shelf])) .information {
+    min-height: 125px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card[data-sold-out]::after,
+  .coverImage,
+  .platform,
+  .information,
+  .actions,
+  .actions :is(button, a) {
+    transition: none;
+  }
+}

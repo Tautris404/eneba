@@ -1,0 +1,192 @@
+.catalog {
+  color: #fff;
+  font-family: Metropolis, Arial, sans-serif;
+}
+
+.container {
+  box-sizing: border-box;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding: 40px 20px;
+}
+
+.shortcuts { padding-block: 0; }
+.alternate { background: #301368; }
+
+.heading {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 10px 0 30px;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 37.5px;
+}
+
+.headingInfo { align-self: center; }
+.headingInfo img { display: block; }
+.carousel { position: relative; }
+.track {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  overscroll-behavior-inline: contain;
+}
+.track::-webkit-scrollbar { display: none; }
+
+.shortcutTrack { flex: 1; justify-content: space-between; gap: 5px; margin: 0 -20px; padding: 0 20px; }
+.shortcutTrack a {
+  display: flex;
+  flex: 0 0 100px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 18px;
+  text-align: center;
+  text-decoration: none;
+  transition: color 250ms;
+}
+.shortcutTrack a:is(:hover, :focus-visible) { color: var(--yellow); }
+.shortcutTrack img { object-fit: contain; }
+
+.shelf { gap: 20px; padding-bottom: 20px; }
+.carousel:hover .shelf { scrollbar-width: auto; }
+.carousel:hover .shelf::-webkit-scrollbar { display: block; width: 5px; height: 5px; }
+@supports not selector(::-webkit-scrollbar) {
+  .carousel:hover .shelf { scrollbar-width: thin; scrollbar-color: #fff #5825cc; }
+}
+.carousel:hover .shelf::-webkit-scrollbar-track { background: #5825cc; }
+.carousel:hover .shelf::-webkit-scrollbar-thumb { background: #fff; }
+.shelf > * { flex: 0 0 200px; min-width: 0; }
+.giftCard { display: block; overflow: hidden; }
+.giftCard img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 7;
+  object-fit: cover;
+  transition: transform 250ms ease-in-out;
+}
+.giftCard:is(:hover, :focus-visible) img { transform: scale(1.04); }
+
+.carousel > button {
+  position: absolute;
+  top: calc(50% - 10px);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  transform: translateY(-50%);
+  border: 0;
+  background: rgb(255 255 255 / 70%);
+  color: #000;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: background-color 150ms ease-in-out;
+}
+.carousel:is(:hover, :focus-within) > button,
+.carousel > button:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.carousel > button:not(:disabled):is(:hover, :focus-visible) { background-color: #fff; }
+.carousel > button:disabled { background-color: rgb(255 255 255 / 40%); cursor: default; }
+.previous { left: 0; }
+.previous svg { transform: scaleX(-1); }
+.next { right: 0; }
+.shortcuts .carousel { display: flex; align-items: center; margin: 20px 0; }
+.shortcuts .carousel > button {
+  position: relative;
+  z-index: 1;
+  top: auto;
+  align-self: stretch;
+  padding: 10px;
+  transform: none;
+  background-color: transparent;
+  color: #fff;
+  opacity: 1;
+  pointer-events: auto;
+  transition: color 250ms, opacity 250ms, background 250ms;
+}
+.shortcuts .previous { order: -1; left: auto; margin-left: -20px; background-image: linear-gradient(90deg, #4618ac 50%, transparent); }
+.shortcuts .next { right: auto; margin-right: -20px; background-image: linear-gradient(90deg, transparent, #4618ac 50%); }
+.shortcuts .carousel > button:not(:disabled):is(:hover, :focus-visible) { background-color: #4618ac; color: var(--yellow); }
+.shortcuts .carousel > button:disabled { background-color: transparent; color: #9385b2; }
+
+.sectionAction { display: flex; justify-content: center; margin-top: 30px; }
+.action {
+  display: grid;
+  box-sizing: border-box;
+  width: 194px;
+  min-height: 35px;
+  place-items: center;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  font: 800 14px Metropolis, Arial, sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 150ms ease-in-out, background-color 150ms ease-in-out;
+}
+.action:is(:hover, :focus-visible) { border-color: var(--yellow); background: rgb(0 0 0 / 25%); }
+
+.genres {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 20px;
+}
+.genres a {
+  display: grid;
+  box-sizing: border-box;
+  grid-template-rows: 18px 40px 18px;
+  align-content: space-between;
+  justify-items: center;
+  min-height: 140px;
+  padding: 13px 8px 18px;
+  background: #5825cc;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 15%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 150ms ease-in-out;
+}
+.genres a:is(:hover, :focus-visible) { background: #351183; }
+.genres a span:last-child { grid-row: 3; }
+
+@media (max-width: 930px) {
+  .genres { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .container { padding-top: 40px; }
+  .shortcuts { padding-top: 0; }
+  .shortcuts .carousel { margin: 20px 0; }
+  .alternate { background: transparent; }
+  .heading { margin: 10px 0; font-size: 20px; line-height: 25px; }
+
+  .productShelf { display: grid; grid-template-columns: minmax(0, 1fr); gap: 15px; overflow: visible; padding-bottom: 0; }
+  .productShelf > :nth-child(n + 11) { display: none; }
+  .carousel:has(.productShelf) > button { display: none; }
+
+  .giftSection { padding-top: 30px; }
+  .shelf:not(.productShelf) { gap: 15px; padding-bottom: 20px; }
+  .shelf:not(.productShelf) > * { flex-basis: 120px; }
+  .giftSection .sectionAction { margin-top: 20px; }
+  .giftSection .action { width: 135px; }
+
+  .genres { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .genres + .sectionAction { margin-top: 40px; }
+}
+
+@media (hover: none) {
+  .carousel > button { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalog :is(a, button, img) { transition: none; }
+}

@@ -1,0 +1,99 @@
+.banners {
+  --preview-width: 10%;
+  --banner-height: 20%;
+  display: flex;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto 50px;
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+}
+
+.banner {
+  position: relative;
+  flex: 0 0 var(--preview-width);
+  padding-top: var(--banner-height);
+  overflow: hidden;
+  background-position: center top;
+  background-size: cover;
+  box-shadow: 0 -4px 20px rgb(0 0 0 / 70%);
+  transition: flex-grow 250ms ease-in-out;
+}
+
+.banner:nth-child(1) { z-index: 4; }
+.banner:nth-child(2) { z-index: 3; }
+.banner:nth-child(3) { z-index: 2; }
+.banner:nth-child(4) { z-index: 1; }
+.banner[data-expanded='true'] { flex-grow: 1; }
+
+.artwork,
+.preview {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.banner[data-expanded='false'] .artwork,
+.mobileArtwork { display: none; }
+
+.preview {
+  right: auto;
+  width: min(10vw, 192px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 150ms ease-in-out;
+}
+
+.preview img,
+.mobileArtwork {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.banner[data-expanded='true'] .preview {
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+.preview:hover::after,
+.preview:focus-visible::after {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 25%);
+  content: '';
+}
+
+.preview:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: -2px;
+}
+
+@media (801px <= width <= 1024px) {
+  .banners { --preview-width: 14%; --banner-height: 28%; }
+  .preview { width: 13.9vw; }
+}
+
+@media (max-width: 800px) {
+  .banners {
+    --preview-width: 25%;
+    --banner-height: 50%;
+    background: linear-gradient(to top, var(--purple), var(--yellow));
+  }
+  .banner { background-image: none !important; }
+  .banner[data-expanded='false'] .artwork,
+  .mobileArtwork { display: block; }
+  .preview { display: none; }
+}
+
+@media (max-width: 600px) {
+  .banners { margin-bottom: 25px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner, .preview { transition: none; }
+}

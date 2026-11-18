@@ -1,0 +1,244 @@
+.header {
+  background: var(--purple);
+  color: #fff;
+  font-family: Metropolis, Arial, Helvetica, sans-serif;
+}
+
+.header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header :is(a, button, summary):focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: -2px;
+}
+
+.topBar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  max-width: 1240px;
+  min-height: 97px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.logo {
+  flex-shrink: 0;
+  margin-right: 20px;
+}
+
+.logo img {
+  display: block;
+  width: 155px;
+  height: auto;
+}
+
+.actions {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.cart,
+.desktopAccount :is(a, button, .accountName) {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  transition: color 150ms ease-in-out;
+}
+
+.cart {
+  position: relative;
+  align-self: stretch;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.cart.mobileCart {
+  display: none;
+}
+
+.cart:is(:hover, :focus-visible) {
+  color: var(--yellow);
+}
+
+.cartCount {
+  position: absolute;
+  top: calc(50% - 18px);
+  right: 2px;
+  min-width: 16px;
+  padding: 2px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background: #c51657;
+  color: #fff;
+  font: 800 10px/12px Metropolis, Arial, sans-serif;
+  text-align: center;
+}
+
+.actions a:is(:hover, :focus-visible) {
+  color: var(--yellow);
+}
+
+.desktopAccount {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.desktopAccount :is(a, button, .accountName) {
+  align-self: stretch;
+}
+
+.desktopAccount svg {
+  height: 25px;
+}
+
+.desktopAccount > span[aria-hidden] {
+  margin: 0 -10px;
+  font-weight: 600;
+}
+
+.desktopNavigation {
+  background: rgb(0 0 0 / 25%);
+}
+
+.navigation {
+  box-sizing: border-box;
+  display: flex;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.navigation :is(a, button) {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 10px;
+  border: 0;
+  background: transparent;
+  color: #dcd8e6;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
+}
+
+.navigation :is(a, button):is(:hover, :focus-visible),
+.header:has(dialog[open]) .navigation button {
+  background: var(--dark-purple);
+  color: var(--yellow);
+}
+
+.mobileMenu {
+  display: none;
+}
+
+@media (min-width: 931px) and (max-width: 1200px) {
+  .topBar {
+    position: relative;
+  }
+}
+
+@media (max-width: 930px) {
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    border-bottom: 1px solid var(--dark-purple);
+  }
+
+  .topBar {
+    position: relative;
+    min-height: 55px;
+    padding: 0;
+    overflow-x: clip;
+  }
+
+  .logo {
+    margin-right: 0;
+    margin-left: 0;
+    transition: margin-left 150ms ease-in-out;
+  }
+
+  .topBar:has([data-product-search][data-open]) .logo {
+    margin-left: -155px;
+  }
+
+  .logo img {
+    width: 100px;
+  }
+
+  .desktopNavigation,
+  .desktopAccount {
+    display: none;
+  }
+
+  .mobileMenu {
+    box-sizing: border-box;
+    display: grid;
+    height: 55px;
+    padding: 0 10px;
+    place-items: center;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .mobileMenu {
+    width: 55px;
+    flex-shrink: 0;
+    padding-left: 15px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+  }
+
+  .mobileMenuIcon {
+    display: block;
+    width: 20px;
+    border-block: 2px solid currentColor;
+  }
+
+  .mobileMenuIcon::before {
+    content: "";
+    display: block;
+    margin: 5px 0;
+    border-bottom: 2px solid currentColor;
+  }
+
+  .actions {
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .topBar .logo {
+      transition: none;
+    }
+  }
+}
+
+@media (max-width: 930px) {
+  button.cart {
+    display: none;
+  }
+
+  .cart.mobileCart {
+    display: flex;
+  }
+}

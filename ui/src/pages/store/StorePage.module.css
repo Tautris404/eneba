@@ -1,0 +1,494 @@
+.page {
+  box-sizing: border-box;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 20px 20px 60px;
+  color: #fff;
+  font-family: Metropolis, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.page h1 {
+  margin: 10px 0 30px;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.25;
+  scroll-margin-top: 70px;
+}
+
+.page :is(button, a, input, select, summary):focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 3px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+}
+
+.results {
+  min-width: 0;
+}
+
+.toolbar {
+  display: grid;
+  grid-template: 'filters filters' auto 'status sort' minmax(50px, auto) / minmax(0, 1fr) auto;
+  align-items: start;
+}
+
+.activeFilters {
+  grid-area: filters;
+}
+
+.desktopSort {
+  grid-area: sort;
+}
+
+.filterBar {
+  display: contents;
+}
+
+.filterDivider {
+  display: none;
+}
+
+.toolbar p {
+  grid-area: status;
+  margin: 0;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.toolbar p strong {
+  font-weight: 800;
+}
+
+@media (min-width: 871px) {
+  .toolbar[data-empty] {
+    grid-template: 'filters' auto / minmax(0, 1fr);
+    min-height: 20px;
+  }
+
+  .toolbar[data-empty] :is(p, .desktopSort) {
+    display: none;
+  }
+
+  .toolbar p {
+    margin: 13px 20px 10px 0;
+    line-height: 14px;
+  }
+
+  .desktopSort {
+    margin-inline-end: -10px;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 20px;
+}
+
+.catalog {
+  position: relative;
+  min-height: 300px;
+}
+
+.catalog[data-loading] > :not(.loading) {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.message {
+  padding: 60px 20px;
+  background: rgb(0 0 0 / 15%);
+  text-align: center;
+}
+
+.message h2 {
+  margin: 0 0 15px;
+  font-size: 22px;
+}
+
+.emptyCatalog {
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+  padding-top: 80px;
+  text-align: center;
+}
+
+.emptyCopy p {
+  margin: 0;
+}
+
+.emptyCopy h2 {
+  margin: 0 0 10px;
+  overflow-wrap: anywhere;
+  font-size: clamp(16px, calc(16.4px + 0.1333vw), 18px);
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.emptyCatalog a {
+  display: flex;
+  align-items: center;
+  min-height: 35px;
+  padding-inline: 10px;
+  background: var(--yellow);
+  color: #000;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 15px;
+  text-decoration: none;
+  transition: background-color 150ms ease-in-out;
+}
+
+.emptyCatalog a:is(:hover, :focus-visible) {
+  background: #f0a613;
+}
+
+.message button,
+.filterDialogFooter button {
+  padding: 12px 20px;
+  border: 0;
+  background: var(--yellow);
+  color: #000;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.loading {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 80px;
+  background: var(--purple);
+}
+
+.mobileFilters {
+  display: none;
+}
+
+.filterDialog {
+  box-sizing: border-box;
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: min(300px, 100%);
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--purple);
+  color: #fff;
+  font: inherit;
+  transform: translateX(-100%);
+  transition: transform 150ms ease-in-out, display 150ms allow-discrete, overlay 150ms allow-discrete;
+}
+
+.filterDialog::backdrop {
+  background: rgb(0 0 0 / 40%);
+  opacity: 0;
+  transition: opacity 150ms ease-in-out, display 150ms allow-discrete, overlay 150ms allow-discrete;
+}
+
+.filterDialog[open]::backdrop {
+  opacity: 1;
+}
+
+html:has(.filterDialog[open]) {
+  scrollbar-gutter: stable;
+}
+
+body:has(.filterDialog[open]) {
+  overflow: hidden;
+}
+
+.filterDialog {
+  display: flex;
+  flex-direction: column;
+}
+
+.filterDialog:not([open]) {
+  display: none;
+}
+
+.filterDialog[open] {
+  transform: translateX(0);
+}
+
+@starting-style {
+  .filterDialog[open] {
+    transform: translateX(-100%);
+  }
+
+  .filterDialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+.filterDialogHeader {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  min-height: 55px;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--purple);
+  background: #5825cc;
+}
+
+.filterDialogHeader h2 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 800;
+}
+
+.filterDialogHeader button {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.filterDialogHeader svg {
+  width: 16px;
+  height: 16px;
+}
+
+.filterDialogBody {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #5825cc;
+  scrollbar-width: thin;
+  scrollbar-color: #fff #5825cc;
+}
+
+.filterDialogBody::-webkit-scrollbar {
+  width: 5px;
+}
+
+.filterDialogBody::-webkit-scrollbar-track {
+  background: #5825cc;
+}
+
+.filterDialogBody::-webkit-scrollbar-thumb {
+  background: #fff;
+}
+
+@supports selector(::-webkit-scrollbar) {
+  .filterDialogBody { scrollbar-width: auto; scrollbar-color: auto; }
+}
+
+.mobileSort {
+  border-bottom: 2px solid var(--purple);
+}
+
+.mobileSort summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px 10px;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 22px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.mobileSort summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobileSort fieldset {
+  display: grid;
+  gap: 15px;
+  min-width: 0;
+  margin: 0;
+  padding: 8px 20px 20px;
+  border: 0;
+}
+
+.mobileSort label {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-height: 20px;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.mobileSort input {
+  appearance: none;
+  box-sizing: border-box;
+  position: relative;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border: 2px solid #dcd8e6;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color 150ms ease-in-out;
+}
+
+.mobileSort input:checked {
+  border-color: var(--yellow);
+}
+
+.mobileSort input::after {
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  content: '';
+  transition: background-color 150ms ease-in-out;
+}
+
+.mobileSort label:hover input:not(:checked)::after {
+  background-color: rgb(220 216 230 / 60%);
+}
+
+.mobileSort input:checked::after {
+  background-color: var(--yellow);
+}
+
+.filterDialogFooter {
+  flex-shrink: 0;
+  padding: 15px 20px;
+  background: #5825cc;
+}
+
+.filterDialogFooter button {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 10px;
+  font-size: 15px;
+}
+
+.filterDialogFooter button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+  }
+}
+
+@media (max-width: 870px) {
+  .page {
+    padding-top: 20px;
+  }
+
+  .page h1 {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .layout {
+    display: block;
+  }
+
+  .sidebar,
+  .desktopSort {
+    display: none;
+  }
+
+  .mobileFilters {
+    grid-area: mobile;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 38px;
+    padding: 5px 15px;
+    border: 0;
+    border-radius: 35px;
+    background: #2c0e6c;
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    line-height: 20px;
+    cursor: pointer;
+  }
+
+  .toolbar {
+    grid-template: 'status' auto 'bar' auto / minmax(0, 1fr);
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .filterBar {
+    grid-area: bar;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .mobileFilters {
+    flex-shrink: 0;
+  }
+
+  .filterDivider {
+    display: block;
+    flex-shrink: 0;
+    width: 1px;
+    height: 30px;
+    margin: 0 20px;
+    padding: 0;
+    border: 0;
+    background: #fff;
+  }
+
+  .filterDivider:last-child {
+    display: none;
+  }
+
+  .toolbar .activeFilters {
+    flex: 1 1 0;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+
+  .toolbar p,
+  .toolbar p strong {
+    color: rgb(255 255 255 / 70%);
+    font-weight: 400;
+    line-height: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filterDialog,
+  .filterDialog::backdrop,
+  .mobileSort input,
+  .mobileSort input::after {
+    transition: none;
+  }
+}

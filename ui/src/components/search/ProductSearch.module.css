@@ -1,0 +1,259 @@
+.search {
+  position: relative;
+  flex: 0 1 550px;
+  min-width: 100px;
+  margin-right: 10px;
+  color: #fff;
+  font-family: Metropolis, Arial, Helvetica, sans-serif;
+}
+
+.search a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.search :is(a, button):focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: -2px;
+}
+
+.search svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.search[data-open] {
+  z-index: 21;
+  background: color-mix(in srgb, var(--purple) 45%, #000);
+}
+
+.searchIcon {
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.searchField {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+  border: 1px solid #fff;
+}
+
+.search input[type='search'] {
+  appearance: none;
+  box-sizing: border-box;
+  display: block;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: 55px;
+  padding: 0 0 0 40px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: 800 19px/1 Metropolis, Arial, Helvetica, sans-serif;
+}
+
+.search input::placeholder {
+  color: #fff;
+  opacity: 0.54;
+}
+
+.search:not([data-open]) :is(.searchField, input[type='search']) {
+  cursor: text;
+}
+
+.search input:focus-visible {
+  outline: none;
+}
+
+.search input::-webkit-search-cancel-button {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .search input[type='search'] {
+    font-size: calc(16.6px + 0.2vw);
+  }
+}
+
+@media (min-width: 931px) and (max-width: 1200px) {
+  .search[data-open] {
+    position: absolute;
+    inset: 20px 20px auto;
+    margin: 0;
+  }
+}
+
+@media (max-width: 930px) {
+  .search {
+    flex: none;
+    width: 44px;
+    min-width: 44px;
+    margin: 0 0 0 auto;
+    background: var(--purple);
+    transition: min-width 150ms ease-in-out;
+  }
+
+  .searchIcon {
+    left: 10px;
+    transition: color 150ms ease-in-out;
+  }
+
+  .searchIcon:hover {
+    color: var(--yellow);
+  }
+
+  .searchField {
+    padding: 0;
+    border: 0;
+  }
+
+  .search input[type='search'] {
+    height: 55px;
+    padding: 0;
+    border: 0;
+    font-size: 16px;
+  }
+
+  .search:not([data-open]) input {
+    opacity: 0;
+  }
+
+  .search:not([data-open]) :is(.searchField, input[type='search']) {
+    cursor: pointer;
+  }
+
+  .search[data-open] {
+    z-index: 2;
+    min-width: 100%;
+    background: var(--purple);
+  }
+
+  .search[data-open] .searchField {
+    padding: 0 10px;
+  }
+
+  .search[data-open] input[type='search'] {
+    padding: 0 45px 0 40px;
+  }
+
+  .search[data-open] input::placeholder {
+    opacity: 0;
+  }
+
+  .search[data-open] .searchIcon {
+    display: none;
+  }
+}
+
+.clear,
+.mobileBack {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.clear svg {
+  width: 16px;
+  height: 16px;
+}
+
+.backdrop {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  background: rgb(0 0 0 / 55%);
+}
+
+.backdrop[data-empty] {
+  background: transparent;
+}
+
+.clear {
+  flex-shrink: 0;
+  padding: 5px;
+  color: #b3aac9;
+  transition: color 150ms ease-in-out;
+}
+
+.mobilePlaceholder,
+.mobileBack {
+  display: none;
+}
+
+.clear:is(:hover, :focus-visible) {
+  color: #fff;
+}
+
+@media (max-width: 930px) {
+  .backdrop {
+    display: none;
+  }
+
+  .mobilePlaceholder {
+    position: absolute;
+    left: 50px;
+    right: 55px;
+    display: block;
+    overflow: hidden;
+    color: rgb(255 255 255 / 55%);
+    font-size: 16px;
+    font-weight: 800;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .mobileBack {
+    position: absolute;
+    z-index: 1;
+    inset: 0 auto auto 0;
+    display: grid;
+    width: 46px;
+    height: 54px;
+    padding: 0;
+    place-items: center;
+    color: rgb(255 255 255 / 85%);
+    transition: color 100ms ease-out;
+  }
+
+  .mobileBack:is(:hover, :active, :focus-visible),
+  .clear:is(:hover, :active, :focus-visible) {
+    color: #fff;
+  }
+
+  .mobileBack svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .clear {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: grid;
+    width: 55px;
+    height: 55px;
+    place-items: center;
+    color: rgb(255 255 255 / 85%);
+  }
+}
+
+@media (max-width: 930px) and (prefers-reduced-motion: reduce) {
+  .search {
+    transition: none;
+  }
+}

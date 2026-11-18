@@ -1,0 +1,79 @@
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.pagination button {
+  display: grid;
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  place-items: center;
+  cursor: pointer;
+  transition: color 100ms ease-out;
+}
+
+.pagination button[aria-current='page'],
+.pagination button:not(.pageArrow):is(:hover, :active) {
+  color: var(--yellow);
+}
+
+.pagination button[aria-current='page'] {
+  pointer-events: none;
+}
+
+.pagination .pageArrow {
+  width: 34px;
+  height: 35px;
+  padding: 0;
+  border: 1px solid currentColor;
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+.pageArrow:first-child {
+  margin-inline-end: 10px;
+}
+
+.pageArrow:last-child {
+  margin-inline-start: 10px;
+}
+
+.previousArrow {
+  transform: rotate(180deg);
+}
+
+.pagination .pageArrow:enabled:is(:hover, :active) {
+  border-color: var(--yellow);
+  background-color: rgb(0 0 0 / 30%);
+}
+
+.pagination .pageArrow:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.pagination > span {
+  padding-inline: 10px;
+  font-weight: 800;
+}
+
+@media (max-width: 600px) {
+  .pagination button:not(.pageArrow),
+  .pagination > span {
+    padding-inline: 5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pagination button,
+  .pagination .pageArrow {
+    transition: none;
+  }
+}

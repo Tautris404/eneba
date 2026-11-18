@@ -1,0 +1,25 @@
+.primary,
+.secondary {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  background: var(--yellow);
+  color: #100926;
+  font: 800 14px/1.2 Metropolis, Arial, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+.primary:is(:hover, :focus-visible):not(:disabled) { background: #f0a613; }
+.primary:active:not(:disabled) { background: #d7930e; }
+.primary:disabled { opacity: .5; cursor: default; }
+.secondary { border-color: #fff; background: transparent; color: #fff; }
+.secondary:hover:not(:disabled) { border-color: var(--yellow); background: rgb(0 0 0 / 30%); }
+.secondary:is(:focus-visible, :active):not(:disabled) { border-color: var(--yellow); background: rgb(0 0 0 / 40%); }
+.secondary:disabled { opacity: .5; cursor: default; }

@@ -1,0 +1,41 @@
+:root {
+  --purple: #4618ac;
+  --dark-purple: #1f0a4d;
+  --yellow: #fad318;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url('../assets/fonts/metropolis-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url('../assets/fonts/metropolis-medium.woff2') format('woff2');
+  font-weight: 600;
+  font-display: block;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url('../assets/fonts/metropolis-bold.woff2') format('woff2');
+  font-weight: 800;
+  font-display: block;
+}
+
+@media (min-width: 1201px) {
+  html {
+    scrollbar-gutter: stable;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--purple);
+}
+
+#root > main {
+  min-height: 100dvh;
+}

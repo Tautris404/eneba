@@ -1,0 +1,179 @@
+.breadcrumb {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 28px;
+  color: #8b849a;
+  font-size: 11px;
+  line-height: 12px;
+}
+
+.breadcrumb a { color: var(--purple); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+
+.order { --status-color: #5825cc; }
+.order[data-status='paid'] { --status-color: #00cf9f; }
+.order[data-status='cancelled'] { --status-color: #ff0022; }
+.order :is(h2, h3, p), .order .heading h1 { margin: 0; }
+.heading { margin-bottom: 20px; }
+.heading p { margin-top: 5px; color: #797189; font-size: 11px; font-weight: 400; line-height: 12px; letter-spacing: 0.6px; }
+
+.products {
+  display: grid;
+  gap: 3px;
+  color: #000;
+  box-shadow: 0 3px 18px rgb(31 10 78 / 5%);
+}
+
+.productHeaders,
+.productRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: 20px;
+  padding-inline: 20px;
+}
+
+.productHeaders {
+  padding-block: 12px 10px;
+  background: #e9e8f7;
+  box-shadow: 0 2px 2px rgb(0 0 0 / 5%);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.productHeaders h2 { font: inherit; }
+.productRow { padding-block: 15px 13px; background: #fff; }
+.product { display: flex; gap: 20px; min-width: 0; overflow-wrap: anywhere; }
+.product img { flex: none; object-fit: cover; }
+.product h3 { font-size: 14px; font-weight: 600; line-height: 18px; }
+.product span { color: #797189; }
+.delivery {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--status-color);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+.delivery svg { flex: none; }
+.productLabel, .deliveryLabel { display: none; }
+.order[data-status='pending'] .delivery svg { height: 24px; }
+
+.redeem, .keyControl { box-sizing: border-box; min-height: 36px; }
+.redeem {
+  display: grid;
+  place-items: center;
+  padding-inline: 10px;
+  border: 0;
+  background: var(--yellow);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  transition: background-color 150ms ease-in-out;
+}
+.redeem:hover { background: #f0a613; }
+.keyControl {
+  display: flex;
+  border: 1px solid #d5c9ee;
+  border-radius: 4px;
+  background: #f6f2ff;
+}
+.keyField {
+  flex: 1;
+  min-width: 0;
+  padding-inline: 12px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #1f0a4e;
+  font: 14px monospace;
+}
+.copyKey {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 96px;
+  padding-inline: 10px;
+  border: 0;
+  border-radius: 0 3px 3px 0;
+  background: var(--purple);
+  color: #fff;
+  font: 800 12px Metropolis, Arial, sans-serif;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+}
+.copyKey:hover { background: #32117d; }
+.copyFeedback { display: block; margin-top: 6px; color: #544d60; }
+.copyFeedback:empty { margin-top: 0; }
+
+.panel { margin-top: 10px; padding: 20px; background: #fff; }
+.panel h2 { color: #1f0a4e; font-size: 12px; font-weight: 800; line-height: 12px; text-transform: uppercase; }
+.paymentHeader { display: flex; justify-content: space-between; gap: 12px; min-height: 32px; }
+.paymentHeader svg { flex: none; color: var(--status-color); }
+.order[data-status='pending'] .paymentHeader svg { width: 18px; }
+.panel .paymentStatus {
+  padding-bottom: 10px;
+  color: var(--status-color);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 24px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.description { padding-bottom: 20px; color: #797189; font-size: 16px; font-weight: 400; line-height: 24px; }
+.failure { padding-bottom: 20px; color: #797189; font-weight: 400; line-height: 18px; }
+.method { font-weight: 400; line-height: 18px; }
+.method strong { color: #000; font-weight: 600; }
+.total {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 30px;
+  color: #1f0a4e;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+}
+
+@media (max-width: 760px) {
+  .productHeaders { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); }
+  .products { gap: 10px; }
+  .productRow {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 5fr);
+    gap: 0;
+    padding-block: 20px 23px;
+  }
+  .productLabel, .deliveryLabel {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    color: #8b849a;
+    font-size: 10px;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+  .productLabel { padding-right: 32px; }
+  .product, .productLabel { padding-block: 15px; }
+  .delivery, .deliveryLabel { padding-block: 4px; border-block: 1px solid #e9e8f7; }
+  .productRow > :last-child:not(.delivery) { grid-column: 2; min-width: 0; margin-top: 5px; }
+  .panel .paymentStatus { font-size: 16px; line-height: 18px; }
+  .description { font-size: 12px; line-height: 18px; }
+  .total { justify-content: flex-end; }
+}
+
+@media (max-width: 420px) {
+  .product { gap: 12px; }
+  .productLabel { padding-right: 12px; }
+  .copyKey { min-width: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .redeem, .copyKey { transition: none; }
+}

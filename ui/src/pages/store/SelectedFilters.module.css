@@ -1,0 +1,436 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 15px;
+  margin-bottom: 20px;
+}
+
+.trigger {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 30px;
+  padding: 5px 15px;
+  border: 0;
+  border-radius: 20px;
+  background: #2c0e6c;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+}
+
+.group {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.textChip {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  height: 30px;
+  padding: 5px 15px;
+  border-radius: 15px;
+  background: #2c0e6c;
+  color: rgb(255 255 255 / 85%);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.textLabel,
+.textValue {
+  margin-top: 2px;
+}
+
+.textLabel {
+  flex-shrink: 0;
+  color: #fff;
+  font-weight: 600;
+}
+
+.textValue {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.textClear {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  margin-left: 5px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: color 150ms ease-in-out;
+}
+
+.textClear svg {
+  display: block;
+  width: 12px;
+  height: 12px;
+}
+
+.textClear:is(:hover, :focus-visible) {
+  color: var(--yellow);
+}
+
+.trigger {
+  gap: 5px;
+  font-weight: 600;
+}
+
+.group:not([data-open]) .menu {
+  display: none;
+}
+
+.trigger:is(:hover, :focus-visible),
+.group[data-open] .trigger {
+  background: #3c1395;
+}
+
+.menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 5px);
+  left: 0;
+  box-sizing: border-box;
+  width: min(320px, calc(100vw - 30px));
+  padding: 20px 12px 5px 15px;
+  background: #5825cc;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.menu > ul {
+  max-height: 210px;
+  padding-inline-end: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: white #5825cc;
+}
+
+.menu > ul::-webkit-scrollbar {
+  width: 5px;
+}
+
+.menu > ul::-webkit-scrollbar-track {
+  background: #5825cc;
+}
+
+.menu > ul::-webkit-scrollbar-thumb {
+  background: #fff;
+}
+
+@supports selector(::-webkit-scrollbar) {
+  .menu > ul { scrollbar-width: auto; scrollbar-color: auto; }
+}
+
+.menuFooter {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  padding: 15px 0;
+  border-top: 1px solid #3c1395;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.menuFooter > button {
+  height: 20px;
+}
+
+.countryField {
+  margin-inline: 20px;
+  --country-value-weight: 600;
+}
+
+.clear {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--yellow);
+  font: inherit;
+  cursor: pointer;
+  transition: color 150ms ease-in-out;
+}
+
+.filters > .clear {
+  font-size: 16px;
+}
+
+.clear:is(:hover, :active, :focus-visible) {
+  color: #f0a613;
+}
+
+.trigger {
+  white-space: nowrap;
+}
+
+.sheetBackdrop,
+.sheetHeader,
+.showResults {
+  display: none;
+}
+
+.priceTitle {
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 20px;
+}
+
+.priceInputs {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.priceInputs input {
+  box-sizing: border-box;
+  flex: 1 1 0;
+  width: 0;
+  min-width: 0;
+  height: 40px;
+  padding: 0 0 0 20px;
+  border: 0;
+  border-radius: 0;
+  background: rgb(0 0 0 / 20%);
+  box-shadow: inset 0 1px 3px #1f0a4d;
+  color: #b3aac9;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  transition: background 150ms ease-in-out;
+}
+
+.priceInputs input:is(:hover, :active) {
+  background: rgb(0 0 0 / 35%);
+}
+
+.priceInputs input:focus {
+  background: rgb(0 0 0 / 30%);
+  color: #fff;
+  outline: none;
+}
+
+.priceInputs strong {
+  padding: 0 10px;
+  font-weight: 700;
+}
+
+.priceError {
+  margin: 0 0 10px;
+  color: #ffb5c8;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.menuFooter {
+  gap: 15px;
+  align-items: center;
+}
+
+.priceGroup .menuFooter {
+  margin-top: 25px;
+}
+
+@media (max-width: 870px) {
+  .filters {
+    position: relative;
+    margin: 0;
+  }
+
+  .filters > * {
+    flex-shrink: 0;
+  }
+
+  .filters > .textChip {
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .filters > .clear {
+    min-height: 38px;
+    white-space: nowrap;
+  }
+
+  .textChip {
+    height: 38px;
+  }
+
+  .trigger {
+    min-height: 38px;
+  }
+
+  .group {
+    position: static;
+  }
+
+  .sheetBackdrop {
+    position: fixed;
+    z-index: 11;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: rgb(0 0 0 / 50%);
+    opacity: 0;
+    pointer-events: none;
+    cursor: default;
+    transition: opacity 100ms ease-out;
+  }
+
+  .group[data-open] .sheetBackdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .group .menu,
+  .group:not([data-open]) .menu {
+    position: fixed;
+    z-index: 18;
+    inset: auto 0 0 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: calc(100% - 55px);
+    padding: 20px 12px 20px 15px;
+    box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+    overflow: hidden;
+    visibility: hidden;
+    transform: translateY(100%);
+    transition: transform 120ms ease-in-out, visibility 0s linear 120ms;
+  }
+
+  .group[data-open] .menu {
+    visibility: visible;
+    transform: none;
+    transition: transform 120ms ease-in-out, visibility 0s;
+  }
+
+  .sheetHeader {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    margin: 0 25px 25px;
+    font-size: 16.9px;
+    font-weight: 800;
+    line-height: 24px;
+  }
+
+  .sheetHeader button {
+    position: absolute;
+    top: -20px;
+    right: -37px;
+    display: block;
+    width: 55px;
+    height: 55px;
+    padding: 15px;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    line-height: 0;
+    cursor: pointer;
+  }
+
+  .sheetHeader svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .optionsMenu > :not(.sheetHeader, .menuFooter, ul) {
+    flex-shrink: 0;
+  }
+
+  .menu.optionsMenu > ul {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .countryField {
+    margin: 0 0 20px;
+  }
+
+  .priceTitle {
+    display: none;
+  }
+
+  .priceInputs {
+    flex-shrink: 0;
+    margin-bottom: 20px;
+  }
+
+  .group .menuFooter,
+  .priceGroup .menuFooter {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    min-height: 55px;
+    margin-top: 0;
+    padding: 15px 0 0;
+  }
+
+  .menuFooter > button {
+    flex: 1 1 0;
+    min-height: 35px;
+    height: auto;
+  }
+
+  .menuFooter > .clear {
+    padding: 0 10px;
+    border: 1px solid #fff;
+    color: #fff;
+    font-weight: 800;
+  }
+
+  .menuFooter > .clear:is(:hover, :active, :focus-visible) {
+    border-color: var(--yellow);
+    color: var(--yellow);
+  }
+
+  .showResults {
+    display: block;
+    padding: 0 10px;
+    border: 0;
+    background: var(--yellow);
+    color: #000;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 15px;
+    cursor: pointer;
+    transition: background-color 150ms ease-in-out;
+  }
+
+  .showResults:is(:hover, :focus-visible) {
+    background: #f0a613;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group .menu,
+  .group[data-open] .menu,
+  .sheetBackdrop,
+  .priceInputs input,
+  .textClear {
+    transition: none;
+  }
+}

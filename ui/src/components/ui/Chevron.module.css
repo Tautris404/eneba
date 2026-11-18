@@ -1,0 +1,42 @@
+.chevron {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 13px;
+  width: 13px;
+  height: 10px;
+}
+
+.chevron::before,
+.chevron::after {
+  position: absolute;
+  top: 3px;
+  width: 8px;
+  border-bottom: 2px solid currentColor;
+  content: '';
+  transition: transform 150ms ease-in-out;
+}
+
+.chevron::before {
+  right: 0;
+  transform: rotate(-45deg);
+}
+
+.chevron::after {
+  left: 0;
+  transform: rotate(45deg);
+}
+
+:is(details[open] > summary, [aria-expanded='true'], [data-expanded]) > .chevron::before {
+  transform: rotate(45deg);
+}
+
+:is(details[open] > summary, [aria-expanded='true'], [data-expanded]) > .chevron::after {
+  transform: rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron::before,
+  .chevron::after {
+    transition: none;
+  }
+}

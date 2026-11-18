@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{.Subject}}</title>
+  </head>
+  <body>
+    <table class="page">
+      <tr>
+        <td class="layout">
+          <table class="header">
+            <tr>
+              <td>
+                <a href="https://www.eneba.com"
+                  ><img src="cid:eneba-header" alt="Eneba" width="130"
+                /></a>
+              </td>
+            </tr>
+          </table>
+          <table class="card">
+            <tr>
+              <td>
+                <table class="content">
+                  <tr>
+                    <td>
+                      {{template "content" .Data}}
+                      <p class="thanks">Thank you.</p>
+                      <img
+                        class="signature-logo"
+                        src="cid:eneba-logo"
+                        alt="Eneba"
+                        width="90"
+                      />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <table class="social">
+            <tr>
+              <td>
+                <a href="https://www.facebook.com/Eneba.Lietuva"
+                  ><img src="cid:facebook" alt="Facebook"
+                /></a>
+              </td>
+              <td>
+                <a href="https://x.com/eneba_games"
+                  ><img src="cid:twitter" alt="X"
+                /></a>
+              </td>
+              <td>
+                <a href="https://www.instagram.com/enebagames/"
+                  ><img src="cid:instagram" alt="Instagram"
+                /></a>
+              </td>
+              <td>
+                <a href="https://discord.com/invite/enebagames"
+                  ><img src="cid:discord" alt="Discord"
+                /></a>
+              </td>
+              <td>
+                <a href="https://www.reddit.com/r/Enebagames/"
+                  ><img src="cid:reddit" alt="Reddit"
+                /></a>
+              </td>
+            </tr>
+          </table>
+          <p class="copyright">
+            Copyright © {{.Year}} Eneba. All rights reserved.
+          </p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
