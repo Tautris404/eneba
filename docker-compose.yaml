@@ -32,7 +32,7 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: "5432"
-      STRIPE_RETURN_BASE_URL: http://localhost:${UI_PORT:-5173}
+      STRIPE_RETURN_BASE_URL: http://localhost:${UI_PORT}
     ports:
       - "${API_PORT}:8080"
     depends_on:
@@ -41,8 +41,12 @@ services:
 
   ui:
     build: ./ui
+    environment:
+      API_UPSTREAM: http://host.docker.internal:${API_PORT}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
-      - "${UI_PORT:-5173}:80"
+      - "${UI_PORT}:80"
     depends_on:
       - api
 
